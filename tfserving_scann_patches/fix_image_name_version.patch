@@ -1,0 +1,36 @@
+diff --git a/scripts/publish.sh b/scripts/publish.sh
+index f070f50..df3b995 100755
+--- a/scripts/publish.sh
++++ b/scripts/publish.sh
+@@ -13,8 +13,6 @@ aws ecr get-login-password --region ${aws_region} \
+         --password-stdin \
+         --username AWS \
+         "${aws_account}.dkr.ecr.${aws_region}.amazonaws.com/${repository}"
+-docker tag $repository:$full_version-$device $aws_account.dkr.ecr.$aws_region.amazonaws.com/$repository:$full_version-$device
+-docker tag $repository:$full_version-$device $aws_account.dkr.ecr.$aws_region.amazonaws.com/$repository:$short_version-$device
+-docker push $aws_account.dkr.ecr.$aws_region.amazonaws.com/$repository:$full_version-$device
+-docker push $aws_account.dkr.ecr.$aws_region.amazonaws.com/$repository:$short_version-$device
++docker tag $repository:$full_version-$device $aws_account.dkr.ecr.$aws_region.amazonaws.com/$repository:$google_scann_version-$device
++docker push $aws_account.dkr.ecr.$aws_region.amazonaws.com/$repository:$google_scann_version-$device
+ docker logout https://$aws_account.dkr.ecr.$aws_region.amazonaws.com
+diff --git a/scripts/shared.sh b/scripts/shared.sh
+index 57be36d..350dfa9 100755
+--- a/scripts/shared.sh
++++ b/scripts/shared.sh
+@@ -64,7 +64,7 @@ function parse_std_args() {
+     # defaults
+     arch='cpu'
+     version='1.13.0'
+-    repository='sagemaker-tensorflow-serving'
++    repository='base_sagemaker_tf_serving_scann_image'
+ 
+     aws_region=$(get_default_region)
+     aws_account=$(get_aws_account)
+@@ -109,6 +109,6 @@ function parse_std_args() {
+     full_version=$(get_full_version $version)
+     short_version=$(get_short_version $version)
+     device=$(get_device_type $arch)
+-
++    google_scann_version='2.6.0'
+     true
+ }
