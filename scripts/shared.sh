@@ -64,7 +64,7 @@ function parse_std_args() {
     # defaults
     arch='cpu'
     version='1.13.0'
-    repository='sagemaker-tensorflow-serving'
+    repository='base_sagemaker_tf_serving_scann_image'
 
     aws_region=$(get_default_region)
     aws_account=$(get_aws_account)
@@ -109,6 +109,6 @@ function parse_std_args() {
     full_version=$(get_full_version $version)
     short_version=$(get_short_version $version)
     device=$(get_device_type $arch)
-
+    google_scann_version='2.6.0'
     true
 }
